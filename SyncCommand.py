@@ -23,6 +23,8 @@ class MessageSync(threading.Thread):
 		threading.Thread.__init__(self)
 		self.message_animation = NewMessageAnimation()
 		self.s = sched.scheduler(time.time, time.sleep)
+		self.last_message = ''
+		self.message_from = ''
 
 	def run(self):	
 		self.ping()
@@ -31,7 +33,7 @@ class MessageSync(threading.Thread):
 
 	def ping(self):
 		if self.has_new_message():
-	 		NewMessageAnimation().display_eye_catcher(1)
+	 		NewMessageAnimation().display_eye_catcher(1, self.message_from, self.last_message)
 
 		self.s.enter(2, 1, self.ping, ())
 		#self.s.run()
@@ -39,29 +41,33 @@ class MessageSync(threading.Thread):
 	def has_new_message(self):
 		res = urllib2.urlopen('http://localhost:5000')
 		if res.code == 200:
-			return json.loads(res.read().decode('utf-8'))['message_count'] > 0
+			res_body = json.loads(res.read().decode('utf-8'))
+			if res_body['message_count'] > 0:
+				self.last_message = res_body['messages'][0]['body']
+				self.message_from = res_body['messages'][0]['from']
+				return True
 		return False
 
 class NewMessageAnimation():
 
-	def display_eye_catcher(self, frame):
-		spaces = frame % 200
+	def display_eye_catcher(self, frame, message_from, message_body):
+		spaces = frame % 100
 		message_prefix = ' '*spaces 
-		sublime.status_message("%s( ͡° ͜ʖ ͡°)" % message_prefix);
+		sublime.status_message("%s( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°) ( ͡° ͜ʖ ͡°)" % message_prefix);
 		s = sched.scheduler(time.time, time.sleep)
-		s.enter(0.03, 1, self.display_eye_catcher, (frame+1,))
-		if frame < 200:
+		s.enter(0.02, 1, self.display_eye_catcher, (frame+1, message_from, message_body))
+		if frame < 100:
 			s.run()
 		else:
-			self.display_anim_frame(1) 
+			self.display_anim_frame(1, message_from, message_body) 
 		
 
-	def display_anim_frame(self, frame):
+	def display_anim_frame(self, frame, message_from, message_body):
 		spaces = frame % 50
 		message_prefix = ' '*spaces 
-		sublime.status_message("%s ツ NEW MESSAGE ツ" % message_prefix);
+		sublime.status_message("%s %s:\"%s\"    --    ツ NEW MESSAGE ツ   --  CTRL+SHIT+R to respond" % (message_prefix, message_from, message_body));
 		s = sched.scheduler(time.time, time.sleep)
-		s.enter(0.07, 1, self.display_anim_frame, (frame+1,))
+		s.enter(0.1, 1, self.display_anim_frame, (frame+1, message_from, message_body))
 		if frame < 100:
 			s.run() 
 		

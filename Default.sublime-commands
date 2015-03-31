@@ -1,4 +1,11 @@
-[{
+[
+{
   "caption": "SubTexting: Start",
   "command": "sync"
-}]
+},
+{
+  "caption": "SubTexting: Load Contacts",
+  "command": "load_contacts"
+},
+
+]
