@@ -11,5 +11,9 @@
   "caption": "SubTexting: Send Message",
   "command": "send_message"
 },
+{
+  "caption": "SubTexting: Sign Up",
+  "command": "register"
+}
 
 ]

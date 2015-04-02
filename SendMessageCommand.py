@@ -36,8 +36,8 @@ class SendMessageCommand(sublime_plugin.WindowCommand):
 			#"registration_ids" : [self.device_id],
 			"data" : {
 				"command" : "send_message",
-				"local_id": 0,
-				"body" : body
+				"to_local_id": 0,
+				"message_body" : body
 			},
 		}
 
