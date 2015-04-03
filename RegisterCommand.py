@@ -1,11 +1,14 @@
 import sublime, sublime_plugin, urllib.parse, urllib.request
+from SubTexting.src import util
+import imp
 
 class RegisterCommand(sublime_plugin.WindowCommand):
 	def run(self):
+		imp.reload(util)
+		print(util.get_pref('password'))
 		self.username = None
 		self.password = None
 		self.get_username()
-		sublime.status_message('hey!')
 
 	def get_username(self, caption='Username: '):
 		self.window.show_input_panel(caption, '', self.handle_username, None, None)
@@ -30,10 +33,12 @@ class RegisterCommand(sublime_plugin.WindowCommand):
 	def register(self):
 		sublime.status_message("%s:%s" % (self.username, self.password))
 
-		data = {'username': self.username, 'password': self.password, 'confirm': self.password}
-		res = urllib2.urlopen('http://localhost:5000/signup', data=urllib.parse.urlencode(data).encode('utf-8'))
+		data = {'username': self.username}
+		res = urllib.request.urlopen('http://localhost:5000/signup', data=urllib.parse.urlencode(data).encode('utf-8'))
 		res_data = res.read().decode('utf-8')
 		if res_data == 'OK':
+			util.set_pref('username', self.username)
+			util.set_pref('password', self.password)
 			sublime.message_dialog('Successfully Registered!')
 		else:
 			sublime.message_dialog(res_data)

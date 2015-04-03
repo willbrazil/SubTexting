@@ -39,14 +39,18 @@ class MessageSync(threading.Thread):
 		#self.s.run()
 
 	def has_new_message(self):
-		res = urllib2.urlopen('http://localhost:5000')
-		if res.code == 200:
-			res_body = json.loads(res.read().decode('utf-8'))
-			if res_body['message_count'] > 0:
-				self.last_message = res_body['messages'][0]['body']
-				self.message_from = res_body['messages'][0]['from']
-				return True
-		return False
+		
+		self.last_message = 'Hey there!!!'
+		self.message_from = 'Kenny!'
+		return True
+		#res = urllib2.urlopen('http://localhost:5000')
+		#if res.code == 200:
+		#	res_body = json.loads(res.read().decode('utf-8'))
+	#		if res_body['message_count'] > 0:
+	#			self.last_message = res_body['messages'][0]['body']
+	#			self.message_from = res_body['messages'][0]['from']
+	#			return True
+	#	return False
 
 class NewMessageAnimation():
 
