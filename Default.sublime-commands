@@ -14,6 +14,10 @@
 {
   "caption": "SubTexting: Sign Up",
   "command": "register"
+},
+{
+  "caption": "SubTexting: Verify",
+  "command": "verify"
 }
 
 ]
