@@ -1,4 +1,5 @@
 import sublime, sublime_plugin, threading, urllib.request as urllib2, json
+from .src import util
 
 SETTINGS_FILE = "SubTexting.sublime-settings"	
 
@@ -27,7 +28,7 @@ class ContactLoader(threading.Thread):
 
 
 	def get_contacts(self):
-		res = urllib2.urlopen('http://localhost:5000/contacts')
+		res = urllib2.urlopen('http://%s/contacts' % util.get_pref('host'))
 		if res.code == 200:
 			contact_list = json.loads(res.read().decode('utf-8'))['contact_list']
 			return contact_list

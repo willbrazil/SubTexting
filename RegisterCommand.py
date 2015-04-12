@@ -1,10 +1,10 @@
 import sublime, sublime_plugin, urllib.parse, urllib.request
 from SubTexting.src import util
-import imp
+#import imp
 
 class RegisterCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		imp.reload(util)
+		#imp.reload(util)
 		self.phone = None
 		self.username = None
 		self.get_username()
@@ -31,7 +31,7 @@ class RegisterCommand(sublime_plugin.WindowCommand):
 
 	def register(self):
 		data = {'username': self.username, 'phone': self.phone}
-		res = urllib.request.urlopen('http://localhost:5000/signup', data=urllib.parse.urlencode(data).encode('utf-8'))
+		res = urllib.request.urlopen('http://%s/signup' % util.get_pref('host'), data=urllib.parse.urlencode(data).encode('utf-8'))
 		res_data = res.read().decode('utf-8')
 		if res_data == 'OK':
 			util.set_pref('username', self.username)

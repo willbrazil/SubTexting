@@ -1,4 +1,5 @@
-import sublime, sublime_plugin
+import sublime, sublime_plugin, urllib, json
+from .src import util
 
 class SendMessageCommand(sublime_plugin.WindowCommand):
 
@@ -25,25 +26,19 @@ class SendMessageCommand(sublime_plugin.WindowCommand):
 		self.window.show_input_panel(self.selected_contact['name'], "", lambda content: self.send_msg(self.selected_contact['local_id'], content), None, None)
 
 	def send_msg(self, to_address, body):
-		gcm_url = 'https://android.googleapis.com/gcm/send'
-
-		headers = {
-			#'Authorization': self.api_key,
-			'Content-Type': 'application/json'
-		}
+		gcm_url = 'http://%s/send' % util.get_pref('host')
 
 		body = {
-			#"registration_ids" : [self.device_id],
-			"data" : {
-				"command" : "send_message",
-				"to_local_id": 0,
-				"message_body" : body
-			},
+			'username': util.get_pref('username'),
+			'password': util.get_pref('password'),
+			'to_local_id': to_address,
+			'message_body': body
 		}
 
-		#data = json.dumps(body)
-		#data = data.encode('utf-8')
-		#req = urllib.request.Request(gcm_url, data, headers)
-		#response = urllib.request.urlopen(req)
+		data = urllib.parse.urlencode(body).encode('utf-8')
+		response = urllib.request.urlopen(gcm_url, data)
 
-		sublime.status_message('Message sent!')
+		if response.code == 200:
+			sublime.status_message('Message sent!')
+		else:
+			sublime.status_message('Failed to send message.')

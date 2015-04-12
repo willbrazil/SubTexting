@@ -19,7 +19,7 @@ class VerifyCommand(sublime_plugin.WindowCommand):
   def is_valid(self, code):
     data = {'username': util.get_pref('username'), 'code': code}
     data = urllib.parse.urlencode(data).encode('utf-8')
-    res = urllib.request.urlopen('http://localhost:5000/verify', data)
+    res = urllib.request.urlopen('http://%s/verify' % util.get_pref('host'), data)
     if res.code == 200:
       if 'OK' in res.read().decode('utf-8'):
         return True
