@@ -1,12 +1,10 @@
 import sublime, sublime_plugin, urllib, json
 from .src import util
-
+import imp
 class SendMessageCommand(sublime_plugin.WindowCommand):
 
-	username = 'will'
-	password = 'brazil'
-
 	def run(self):
+		imp.reload(util)
 		self.contacts = self.get_contact_list()
 		self.names = list(self.contacts.keys())
 		self.pick_to_address()
@@ -29,15 +27,14 @@ class SendMessageCommand(sublime_plugin.WindowCommand):
 		gcm_url = 'http://%s/send' % util.get_pref('host')
 
 		body = {
-			'username': util.get_pref('username'),
-			'password': util.get_pref('password'),
 			'to_local_id': to_address,
 			'message_body': body
 		}
+		print(util.get_basic_http_auth_string())
 
 		data = urllib.parse.urlencode(body).encode('utf-8')
-		response = urllib.request.urlopen(gcm_url, data)
-
+		req = urllib.request.Request(gcm_url, data, headers={'Authorization': util.get_basic_http_auth_string()})
+		response = urllib.request.urlopen(req)
 		if response.code == 200:
 			sublime.status_message('Message sent!')
 		else:
