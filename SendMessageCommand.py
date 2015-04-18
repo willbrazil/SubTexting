@@ -3,23 +3,21 @@ from .src import util
 
 class SendMessageCommand(sublime_plugin.WindowCommand):
 
-	username = 'will'
-	password = 'brazil'
-
 	def run(self):
 		self.contacts = self.get_contact_list()
-		self.names = list(self.contacts.keys())
+		self.names = list(self.contacts.values())
+		self.local_ids = list(self.contacts.keys())
 		self.pick_to_address()
 
 	def get_contact_list(self):
 		return sublime.load_settings('SubTexting.sublime-settings').get('contact_list')
 
 	def pick_to_address(self):
-		self.window.show_quick_panel(self.names, self.handle_addressed_picked)	
+		self.window.show_quick_panel(self.names, self.handle_addressed_picked)
 
 	def handle_addressed_picked(self, index):
 		if index >= 0 :
-			self.selected_contact = {'name' : self.names[index], 'local_id' : self.contacts[self.names[index]]}
+			self.selected_contact = {'name' : self.names[index], 'local_id' : self.local_ids[index]}
 			self.get_msg_body()
 
 	def get_msg_body(self):
@@ -36,7 +34,10 @@ class SendMessageCommand(sublime_plugin.WindowCommand):
 		}
 
 		data = urllib.parse.urlencode(body).encode('utf-8')
-		response = urllib.request.urlopen(gcm_url, data)
+
+		req = urllib.request.Request(gcm_url, data,  headers={'Authorization': util.get_auth_token()})
+
+		response = urllib.request.urlopen(req)
 
 		if response.code == 200:
 			sublime.status_message('Message sent!')
