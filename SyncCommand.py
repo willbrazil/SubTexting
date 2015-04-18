@@ -1,4 +1,5 @@
 import sublime, sublime_plugin, threading, sched, time, urllib.request as urllib2, json
+#from .src import cos_module
 
 class SyncCommand(sublime_plugin.ApplicationCommand):
 
@@ -39,7 +40,6 @@ class MessageSync(threading.Thread):
 		#self.s.run()
 
 	def has_new_message(self):
-		
 		self.last_message = 'Hey there!!!'
 		self.message_from = 'Kenny!'
 		return True
@@ -64,7 +64,7 @@ class NewMessageAnimation():
 			s.run()
 		else:
 			self.display_anim_frame(1, message_from, message_body) 
-		
+
 
 	def display_anim_frame(self, frame, message_from, message_body):
 		spaces = frame % 50
@@ -74,5 +74,5 @@ class NewMessageAnimation():
 		s.enter(0.1, 1, self.display_anim_frame, (frame+1, message_from, message_body))
 		if frame < 100:
 			s.run() 
-		
+
 
