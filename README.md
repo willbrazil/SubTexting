@@ -4,6 +4,10 @@ Sublime Text 3 plugin which allows users to send and receive text messages.
 
 ## Still working on readme.
 
+## Example
+
+![Alt text](/doc/img/send_msg_01?raw=true "Send 01")
+
 ## I Don't Want My Contacts Stored On The Could!
 
 We don't want it either! So we didn't!
