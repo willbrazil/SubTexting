@@ -1,4 +1,5 @@
-import sublime, sublime_plugin, threading, sched, time, urllib.request as urllib2, json
+import sublime, sublime_plugin, threading, sched, time, urllib, json
+from .src import util
 #from .src import cos_module
 
 class SyncCommand(sublime_plugin.ApplicationCommand):
@@ -11,10 +12,9 @@ class SyncCommand(sublime_plugin.ApplicationCommand):
 			print("Already running.")
 		else:
 			print('Started.')
-			thread = MessageSync(5)
-			thread.start()
+			self.thread = MessageSync(5)
+			self.thread.start()
 			self.running = True
-		#self.view.insert(edit, 0, "Hello, World!")
 
 class MessageSync(threading.Thread):
 
@@ -27,30 +27,28 @@ class MessageSync(threading.Thread):
 		self.last_message = ''
 		self.message_from = ''
 
-	def run(self):	
-		self.ping()
-		#self.view.insert(self.edit, 0, "Inside thread!")
-		#self.result = 'Hey!!!!!!!'
+	def run(self):
+		while True:
+			self.ping()
+			print('sleep for 10')
+			time.sleep(10)
+			print('wake')
 
 	def ping(self):
 		if self.has_new_message():
 	 		NewMessageAnimation().display_eye_catcher(1, self.message_from, self.last_message)
 
-		self.s.enter(2, 1, self.ping, ())
-		#self.s.run()
-
 	def has_new_message(self):
-		self.last_message = 'Hey there!!!'
-		self.message_from = 'Kenny!'
-		return True
-		#res = urllib2.urlopen('http://localhost:5000')
-		#if res.code == 200:
-		#	res_body = json.loads(res.read().decode('utf-8'))
-	#		if res_body['message_count'] > 0:
-	#			self.last_message = res_body['messages'][0]['body']
-	#			self.message_from = res_body['messages'][0]['from']
-	#			return True
-	#	return False
+
+		req = urllib.request.Request('http://%s/message' % util.get_host(), headers={'Authorization': util.get_auth_token()})
+		res = urllib.request.urlopen(req)
+		if res.code == 200:
+			res_body = json.loads(res.read().decode('utf-8'))
+			if len(res_body['messages']) > 0:
+				self.last_message = res_body['messages'][0]['body']
+				self.message_from = res_body['messages'][0]['local_id']
+				return True
+		return False
 
 class NewMessageAnimation():
 
@@ -68,7 +66,7 @@ class NewMessageAnimation():
 
 	def display_anim_frame(self, frame, message_from, message_body):
 		spaces = frame % 50
-		message_prefix = ' '*spaces 
+		message_prefix = ' '*spaces
 		sublime.status_message("%s %s:\"%s\"    --    ツ NEW MESSAGE ツ   --  CTRL+SHIT+R to respond" % (message_prefix, message_from, message_body));
 		s = sched.scheduler(time.time, time.sleep)
 		s.enter(0.1, 1, self.display_anim_frame, (frame+1, message_from, message_body))
