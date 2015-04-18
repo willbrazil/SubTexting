@@ -2,6 +2,16 @@
 
 Sublime Text 3 plugin which allows users to send and receive text messages.
 
+## How does it work?
+
+SubTexting connects to your Android device and uses the device to dispatch messages.
+
+### Send Message
+...
+
+### Receive Message
+...
+
 ## Still working on readme.
 
 ## Sending Msg
