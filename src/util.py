@@ -17,3 +17,7 @@ def get_auth_token():
   user_and_pass = "%s:%s" % (get_pref('username'), get_pref('key'))
   e_auth = base64.b64encode(bytes(user_and_pass, 'utf-8')).decode('utf-8')
   return "Basic %s" % e_auth
+
+def get_contact_name(local_id):
+  contacts = get_pref('contact_list')
+  return contacts[str(local_id)]

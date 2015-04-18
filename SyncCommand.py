@@ -10,6 +10,7 @@ class SyncCommand(sublime_plugin.ApplicationCommand):
 	def run(self):
 		if self.running:
 			print("Already running.")
+			sublime.message.status_message('Already running.')
 		else:
 			print('Started.')
 			self.thread = MessageSync(5)
@@ -30,13 +31,11 @@ class MessageSync(threading.Thread):
 	def run(self):
 		while True:
 			self.ping()
-			print('sleep for 10')
 			time.sleep(10)
-			print('wake')
 
 	def ping(self):
 		if self.has_new_message():
-	 		NewMessageAnimation().display_eye_catcher(1, self.message_from, self.last_message)
+	 		NewMessageAnimation().display_eye_catcher(1, util.get_contact_name(self.message_from), self.last_message)
 
 	def has_new_message(self):
 
