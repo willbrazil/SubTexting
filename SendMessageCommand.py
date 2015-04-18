@@ -25,7 +25,7 @@ class SendMessageCommand(sublime_plugin.WindowCommand):
 		self.window.show_input_panel(self.selected_contact['name'], "", lambda content: self.send_msg(self.selected_contact['local_id'], content), None, None)
 
 	def send_msg(self, to_address, body):
-		gcm_url = 'http://%s/send' % util.get_pref('host')
+		gcm_url = 'http://%s/send' % util.get_host()
 
 		body = {
 			'to_local_id': to_address,

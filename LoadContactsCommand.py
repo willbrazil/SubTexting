@@ -29,7 +29,7 @@ class ContactLoader(threading.Thread):
 
 	def get_contacts(self):
 
-		req = urllib.request.Request('http://%s/contacts' % util.get_pref('host'), headers={'Authorization': util.get_auth_token()})
+		req = urllib.request.Request('http://%s/contacts' % util.get_host(), headers={'Authorization': util.get_auth_token()})
 
 		res = urllib.request.urlopen(req)
 		if res.code == 200:
