@@ -4,7 +4,7 @@ Sublime Text 3 plugin which allows users to send and receive text messages. (And
 
 ## Setup
 
-### Create an account
+#### Create an account
 
 CTRL + SHIFT + P -> SubTexing: Sign Up
 
@@ -16,7 +16,7 @@ CTRL + SHIFT + P -> SubTexting: Verify
 
 and insert the confirmation code you've received.
 
-### Install Android App
+#### Install Android App
 
 Download: link_to_app
 
@@ -24,7 +24,7 @@ Use the key you've received to log in the app and select the contacts you'd like
 
 SubTexting <b>DOES NOT</b> store the phone number of your contacts! To learn more, scroll down to "I Don't Want My Contacts Stored On The Could!"
 
-### Load Contacts Onto SubTexting
+#### Load Contacts Onto SubTexting
 
 Once you've loaded your contacts through the Android app, press
 
@@ -34,21 +34,9 @@ This will download the uploaded contacts to SubTexting.
 
 ## Usage
 
+#### Send Message
 
-
-## How does it work?
-
-SubTexting connects to your Android device and uses the device to dispatch messages.
-
-### Send Message
-...
-
-### Receive Message
-...
-
-## Still working on readme.
-
-## Sending Msg
+CTRL + SHIFT + P -> SubTexting: Send Message
 
 ![Alt text](/doc/img/send_msg_01.png?raw=true "Send 01")
 
@@ -56,8 +44,10 @@ SubTexting connects to your Android device and uses the device to dispatch messa
 
 ![Alt text](/doc/img/send_msg_03.png?raw=true "Send 03")
 
+#### Receive Message
 
-## Receive Msg
+UNDER DEVELOPMENT. Feature not stable.
+
 
 ![Alt text](/doc/img/receive_01.png?raw=true "Send 01")
 
