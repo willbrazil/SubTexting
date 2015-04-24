@@ -18,7 +18,7 @@ and insert the confirmation code you've received.
 
 #### Install Android App
 
-Download: link_to_app
+Download: https://play.google.com/store/apps/details?id=will.subtexting
 
 Use the key you've received to log in the app and select the contacts you'd like SubTexting to know about.
 
