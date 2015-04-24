@@ -20,7 +20,7 @@ class RegisterCommand(sublime_plugin.WindowCommand):
 			self.get_phone()
 
 	def get_phone(self, error_msg=''):
-		self.window.show_input_panel("%s Phone (we will NOT store your number!): " % error_msg, '5745142948', self.handle_phone, None, None)
+		self.window.show_input_panel("%s Phone (we will NOT store your number!): " % error_msg, '', self.handle_phone, None, None)
 
 	def handle_phone(self, content):
 		if len(content) != 10:
