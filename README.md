@@ -2,7 +2,7 @@
 
 Sublime Text 3 plugin which allows users to send and receive text messages. (Android Only)
 
-## Sign Up
+## Setup
 
 ### Create an account
 
