@@ -1,6 +1,40 @@
 # SubTexting
 
-Sublime Text 3 plugin which allows users to send and receive text messages.
+Sublime Text 3 plugin which allows users to send and receive text messages. (Android Only)
+
+## Sign Up
+
+### Create an account
+
+CTRL + SHIFT + P -> SubTexing: Sign Up
+
+Insert username and phone number. You should then receive a confirmation text message with a key code.
+
+Once you've received your key, press
+
+CTRL + SHIFT + P -> SubTexting: Verify
+
+and insert the confirmation code you've received.
+
+### Install Android App
+
+Download: link_to_app
+
+Use the key you've received to log in the app and select the contacts you'd like SubTexting to know about.
+
+SubTexting DOES NOT store the phone number of your contacts! To learn more, scroll down to "I Don't Want My Contacts Stored On The Could!"
+
+### Load Contacts Onto SubTexting
+
+Once you've loaded your contacts through the Android app, press
+
+CTRL + SHIFT + P -> SubTexting: Load Contacts
+
+This will download the uploaded contacts to SubTexting.
+
+## Usage
+
+
 
 ## How does it work?
 
