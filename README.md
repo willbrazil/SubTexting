@@ -22,7 +22,7 @@ Download: link_to_app
 
 Use the key you've received to log in the app and select the contacts you'd like SubTexting to know about.
 
-SubTexting DOES NOT store the phone number of your contacts! To learn more, scroll down to "I Don't Want My Contacts Stored On The Could!"
+SubTexting <b>DOES NOT</b> store the phone number of your contacts! To learn more, scroll down to "I Don't Want My Contacts Stored On The Could!"
 
 ### Load Contacts Onto SubTexting
 
