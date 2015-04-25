@@ -1,11 +1,14 @@
 import sublime, sublime_plugin, urllib, json
 from .src import util
-import imp
 class SendMessageCommand(sublime_plugin.WindowCommand):
 
 	def run(self):
-		imp.reload(util)
 		self.contacts = self.get_contact_list()
+
+		if self.contacts == None:
+			sublime.message_dialog('You have not uploaded/loaded your contacts yet. Please download Android app and push some of your contacts.')
+			return
+
 		self.names = list(self.contacts.values())
 		self.local_ids = list(self.contacts.keys())
 		self.pick_to_address()
