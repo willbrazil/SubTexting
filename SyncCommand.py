@@ -10,7 +10,7 @@ class SyncCommand(sublime_plugin.ApplicationCommand):
 	def run(self):
 		if self.running:
 			print("Already running.")
-			sublime.message.status_message('Already running.')
+			sublime.status_message('Already running.')
 		else:
 			print('Started.')
 			self.thread = MessageSync(5)
@@ -35,7 +35,10 @@ class MessageSync(threading.Thread):
 
 	def ping(self):
 		if self.has_new_message():
-	 		NewMessageAnimation().display_eye_catcher(1, util.get_contact_name(self.message_from), self.last_message)
+			print('New msg.')
+			NewMessageAnimation().display_eye_catcher(1, util.get_contact_name(self.message_from), self.last_message)
+		else:
+			print('No new msg.')
 
 	def has_new_message(self):
 
@@ -66,7 +69,7 @@ class NewMessageAnimation():
 	def display_anim_frame(self, frame, message_from, message_body):
 		spaces = frame % 50
 		message_prefix = ' '*spaces
-		sublime.status_message("%s %s:\"%s\"    --    ツ NEW MESSAGE ツ   --  CTRL+SHIT+R to respond" % (message_prefix, message_from, message_body));
+		sublime.status_message("%s %s:\"%s\"    --    ツ NEW MESSAGE ツ   --" % (message_prefix, message_from, message_body));
 		s = sched.scheduler(time.time, time.sleep)
 		s.enter(0.1, 1, self.display_anim_frame, (frame+1, message_from, message_body))
 		if frame < 100:
