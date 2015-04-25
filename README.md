@@ -10,10 +10,11 @@ Feel free to contact me if you have any issues. willbrazil.usa@gmail.com
 
 #### Install Plugin
 
-#####Using <a href='https://packagecontrol.io/'>Sublime Package Manager</a>
+##### Using <a href='https://packagecontrol.io/'>Sublime Package Manager</a>
 Ctrl + Shift + P -> Package Control: Install Package -> SubTexting
 
-If you don't use npm, clone this repo onto your Sublime packages folder.
+##### Manually
+Clone this repo onto your Sublime packages folder.
 
 #### Create an account
 
