@@ -1,4 +1,4 @@
-# SubTexting
+# SubTexting - Send and receive text messages through Sublime
 
 Sublime Text 3 plugin which allows users to send and receive text messages. (Android Only)
 
