@@ -60,7 +60,7 @@ CTRL + SHIFT + P -> SubTexting: Send Message
 
 UNDER DEVELOPMENT. Feature not stable.
 
-## I Don't Want My Contacts Stored On The Could!
+## I Don't Want My Contacts Stored On The Cloud!
 
 We don't want it either! So we didn't!
 
