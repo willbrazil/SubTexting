@@ -60,9 +60,6 @@ CTRL + SHIFT + P -> SubTexting: Send Message
 
 UNDER DEVELOPMENT. Feature not stable.
 
-
-![Alt text](/doc/img/receive_01.png?raw=true "Send 01")
-
 ## I Don't Want My Contacts Stored On The Could!
 
 We don't want it either! So we didn't!
