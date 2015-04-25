@@ -2,7 +2,7 @@
 
 Sublime Text 3 plugin which allows users to send and receive text messages. (Android Only)
 
-If you'd like to desgin an icon for the Adroid app/this project. Check out: https://github.com/wguedes01/subtexting-app/issues/1
+If you'd like to design an icon for the Android app/this project. Check out: https://github.com/wguedes01/subtexting-app/issues/1
 
 Feel free to contact me if you have any issues. willbrazil.usa@gmail.com
 
